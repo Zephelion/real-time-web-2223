@@ -93,8 +93,31 @@ On the client side, you can connect to the Socket.IO server using the io() funct
 Here is an example how I handled that on the client side
 
 ```javascript
+var socket = io();
+console.log("hier komt de socket logica");
 
+const messages = document.querySelector('ul');
+const form = document.querySelector('form');
+const input = document.querySelector('input');
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value) {
+        socket.emit('chat message', input.value);
+        input.value = '';
+    }
+});
+
+socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+    const li = document.createElement('li');
+    li.textContent = msg;
+    messages.appendChild(li);
+});
 ```
+
+easy peasy lemon squeezy amirite :thinking:
 
 
 ## Grading
@@ -108,94 +131,4 @@ Your efforts will be graded using a single point rubric (see below). You will ha
 |  | *Data management* The server maintains a data model and each client is continuously updated with the correct data. |  |
 |  | *Multi-user support* Multiple clients can connect to the server. Interaction works as expected and is not dependent on the number of clients. You can explain how your app approaches this. |  |
 
-## Programme
 
-### Daily Schedule
-To keep things simple we use a daily schedule that will be used during normal course days (monday/tuesday). We make exceptions for fridays, on these days a different schedule will be given.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| *~09:00* | *(Shyanta \|\| Justus)* | *Standup* |
-| 09:30 | Tribe *+(Shyanta \|\| Justus)* | Talk with crucial information (make sure you attend!) |
-| 11:00 | Tribe | Work on the (day)assignment |
-|  | Per table *+(Shyanta \|\| Justus)* | Standup |
-| 13:00 | Tribe *+(Student assistants)* | Continue work on the (day)assignment |
-| 16:00ish | Tribe | Wrapup |
-
-### Week 1 - Getting a grip
-Goal: Build and deploy a simple but unique real-time app
-
-#### Monday 17 April 
-**Talk subjects:** Hit the ground running... [(slides)](https://docs.google.com/presentation/d/1MLSch_uKNEDyfz7fo71jbJrprunxQwd9GtgTse8wWpo/edit?usp=sharing) Course objective and explanation of the assignment, examples from last year, explanation of real-time, (live coded) bare bone chat app and deployment on Heroku.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-1-make-it-so) Make it so *(as a team)*: Implement (code/style/discuss/deploy) basic chat (or other realtime) functionality on your teampage!
-
-#### Tuesday 18 April
-**Talk subjects:** My first realtime web app! [(slides)]() Short recap, (local) data management, using (wire) flows for realtime web apps.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-2-make-it-so) Make it so *(individually)*. i) Create (code/style/discuss/deploy) a chat app (or other realtime functionality) based on the examples and ii) add your own unique feature!
-
-#### Friday 21 april
-
-Friday afternoon we will have a [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this is really good for your programming insight and helps others refining/refactoring their code.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| 14:00 | Tribe *+(Shyanta \|\| Justus)* | Peer review |
-
-### Week 2 - Sockets and data
-Goal: Store, manipulate and share data between server-client   
-
-#### Monday 24 April
-**Talk subjects:** Data driven development?! [(slides)]() Feedback about last week, final assignment and conditions (rubric), explanation of data management, Long polling vs Websockets. \
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-1-proof-of-concept) (Proof of) Concept *(individually)*. i) Create a (3 > 1) concept based on existing data from an API and ii) map this data using modelling techniques.
-
-#### Tuesday 25 April
-**Talk subjects:** Above all else, show the data. [(slides)]() Securing real-time web apps, offline support, the publication/subscription model and (case study) Quek!\
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-2-proof-of-concept) Proof of concept *(individually)*: i) Create (code/style/discuss/deploy) part of the core functionality for your concept and ii) show the  corresponding data lifecycle diagram.
-
-### Week 3 - Dealing with multiple users
-Goal: Handle data sharing and multi-user support 
-
-#### Monday 8 May
-**Talk subjects:** Roll your own... [(slides) ]() Data management, the functional programming trinity (map, filter and reduce). OAuth?!
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-1-data-management)
-
-#### Tuesday 9 May
-**Talk subjects:** Not ignoring the UI-Stack! [(slides)](). Usability, feedback, feedforward etc. in real-time web apps, (case study) postNL loader and FAQ.
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-2-user-testing)
-
-#### Friday 12 May
-We will have a final [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this helps others dotting the i’s on their project.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| 14.00 | Tribe *+(Shyanta \|\| Justus)* | Peer review |
-| 15.30 | Tribe *+(Shyanta \|\| Justus)* | Finalize your assignment |
-| 16.00 | Tribe *+(Shyanta \|\| Justus)* | (drinks?!) |
-
-<!-- Here are some hints for your projects Readme.md! -->
-
-<!-- Start out with a title and a description -->
-
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
-
-<!-- Add a link to your live demo in Github Pages 🌐-->
-
-<!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
-
-<!-- Maybe a table of contents here? 📚 -->
-
-<!-- ☝️ replace this description with a description of your own work -->
-
-<!-- How about a section that describes how to install this project? 🤓 -->
-
-<!-- ...but how does one use this project? What are its features 🤔 -->
-
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-
-<!-- This would be a good place for your data life cycle ♻️-->
-
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
-
-<!-- We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
-
-<!-- How about a license here? When in doubt use MIT. 📜  -->
