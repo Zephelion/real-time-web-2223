@@ -25,10 +25,76 @@ Next, you need to create a Socket.IO server instance and attach it to your Expre
 Here's an example of how to create I created a socket.io server in my node application.
 
 ```javascript
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+
+import { engine } from 'express-handlebars';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import router from './routes/index.js';
+
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.engine('hbs', engine({extname: 'hbs'}));
+app.set('view engine', 'hbs');
+app.set('views', './views');
+app.use(express.static('public'));
+
+
+app.use('/', router);
+
+io.on('connection', (socket) => {
+    console.log('A user connected');
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+    
+    socket.on('chat message', (msg) => {
+        console.log('message: ' + msg);
+        io.emit('chat message', msg);
+    })
+});
+
+server.listen(process.env.PORT, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT}`);
+});
 ```
 
+At the top I am importing all the necessary packages I need. In this case it was express, express-handlebars, dotenv and my routes. How did I implement socket.io in my application?
+```javascript
+io.on('connection', (socket) => {
+    console.log('A user connected');
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+    
+    socket.on('chat message', (msg) => {
+        console.log('message: ' + msg);
+        io.emit('chat message', msg);
+    })
+});
+```
+Inside the `connection` event listener, we're listening for a custom event called `chat message`, which is emitted by the client when they send a chat message. When we receive a chat message event, we log the message to the console and broadcast it to all connected clients using the `io.emit()` method.
+
+Finally, we're starting the Express.js server and listening on port 3000 (declared the port in my `.env` file).
+
+On the client side, you can connect to the Socket.IO server using the io() function provided by the Socket.IO library. You can then emit custom events to the server and listen for events emitted by the server.
+
+Here is an example how I handled that on the client side
+
+```javascript
+
+```
 
 
 ## Grading
