@@ -1,38 +1,6 @@
 # Real-Time Web @cmda-minor-web 2022 - 2023
-
-## Table of Contents
-- [Synopsis](#synopsis)
-- [Description](#description)
-- [Communication](#communication)
-- [Goals](#goals)
-- [Grading](#grading)
-- [Programme](#programme)
-
-## Synopsis
-- Course: Real-Time Web
-- Course Coordinator: Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Minor Coordinator(s): Robert Spier ([@roberrrt-s](https://github.com/roberrrt-s)) & Vasilis van Gemert ([@vasilisvg](https://github.com/vasilisvg))
-- Lecturers: Shyanta Vleugel ([@shyanta](https://github.com/shyanta)) & Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Student Assistants: 
-- Credit: 3 ECTS credits
-- Academic year: 2022-2023
-- Programme: Communication and Multimedia Design (full time bachelor)
-- Language: Dutch instructions and English resources
-
 ## Description
 During this course you will learn how to build a real-time application. You will learn techniques to setup an open connection between the client and the server. This will enable you to send data in real-time both ways, at the same time.
-
-## Communication
-- [Github](https://github.com/cmda-minor-web/real-time-web-2223)
-- [Microsoft Teams](https://teams.microsoft.com/l/channel/19%3a61df853840064eae8ae6fc2dc9fc4566%40thread.tacv2/09%2520Real%2520Time%2520Web?groupId=c8b97eb6-ad53-4531-ad66-5c3c6297951c&tenantId=0907bb1e-21fc-476f-8843-02d09ceb59a7)
-- [Brightspace](https://dlo.mijnhva.nl/d2l/home/456154)
-
-If you have questions:
-- [Look at the additional resources]()
-- [Use a search engine like startpage](https://www.startpage.com/)
-- [Ask questions on MS Teams](https://teams.microsoft.com/l/channel/19%3a61df853840064eae8ae6fc2dc9fc4566%40thread.tacv2/09%2520Real%2520Time%2520Web?groupId=c8b97eb6-ad53-4531-ad66-5c3c6297951c&tenantId=0907bb1e-21fc-476f-8843-02d09ceb59a7) (please help each other!)
-- [Contact a student-assisstant](#synopsis)
-- [Contact a lecturer](#synopsis)
 
 ## Goals
 After finishing this program you can:
@@ -40,6 +8,28 @@ After finishing this program you can:
 - _handle real-time client-server interaction;_
 - _handle real-time data management;_
 - _handle multi-user support._
+
+## Week 1
+### Socket.io & Express.js
+Socket.IO is a popular JavaScript library that enables real-time, bidirectional, event-based communication between the server and the client in web applications. It is used primarily in Node.js applications, including those built with the Express.js framework.
+
+Express.js is a lightweight, flexible framework for building web applications in Node.js. It provides a set of tools and conventions for handling HTTP requests and responses, routing, and middleware.
+
+When used together, Socket.IO and Express.js allow developers to easily add real-time communication capabilities to their web applications.
+
+To use Socket.IO with an Express.js application, you first need to install the Socket.IO library and add it to your project dependencies. You can do this using the npm package manager by running the following command:
+`npm install socket.io`
+
+Next, you need to create a Socket.IO server instance and attach it to your Express.js server instance. This is typically done in the same file where you initialize your Express.js server.
+
+Here's an example of how to create I created a socket.io server in my node application.
+
+```javascript
+
+
+```
+
+
 
 ## Grading
 Your efforts will be graded using a single point rubric (see below). You will have to pass the criterion (centre column) to pass the course. During the test you will be consulted and will be given feedback on things we think deficient and things we think are an improvement on the criterion.
