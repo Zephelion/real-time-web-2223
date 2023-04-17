@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+ul{
+    height: 100vh;
+    padding: 15px;
+}
+
+li{
+    list-style: none;
+    background-color: rgb(242 242 242);
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
+main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+form{
+    /* position: absolute;
+    bottom: 0; */
+    padding: 15px;
+    width: 100%;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+h1{
+    font-weight: 100;
+}

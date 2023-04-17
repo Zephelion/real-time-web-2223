@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.6.1"
+  },
+  "name": "real-time-web-2223",
+  "description": "## Table of Contents - [Synopsis](#synopsis) - [Description](#description) - [Communication](#communication) - [Goals](#goals) - [Grading](#grading) - [Programme](#programme)",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zephelion/real-time-web-2223.git"
+  },
+  "author": "Russell Numo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zephelion/real-time-web-2223/issues"
+  },
+  "homepage": "https://github.com/Zephelion/real-time-web-2223#readme"
+}
