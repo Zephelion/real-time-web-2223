@@ -36,6 +36,16 @@ io.on('connection', (socket) => {
         console.log('message: ' + msg);
         io.emit('chat message', msg);
     })
+
+    socket.on('typing', () => {
+        console.log('User is typing...');
+        io.emit('typing');
+    })
+
+    socket.on('stop typing', () => {
+        console.log('User stopped typing...');
+        io.emit('stop typing');
+    });
 });
 
 server.listen(process.env.PORT, () => {

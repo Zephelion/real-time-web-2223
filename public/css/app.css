@@ -28,6 +28,15 @@ main{
     flex-direction: column;
 }
 
+div.typing{
+    padding: 15px;
+    visibility: hidden;
+}
+
+div.typing.visible{
+    visibility: visible;
+}
+
 form{
     /* position: absolute;
     bottom: 0; */
