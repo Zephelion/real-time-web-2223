@@ -117,7 +117,28 @@ socket.on('chat message', (msg) => {
 });
 ```
 
-easy peasy lemon squeezy amirite :thinking:
+easy peasy lemon squeezy amirite :thinking:.
+
+Next I tried to create a user is typing functionality with sockets. I first started by creating an `keydown` event listener in my client side that checks whenever a user has typed in the input field. I used a debounce functionality to make it little bit more functional.
+
+```javascript
+input.addEventListener('keydown', () => {
+    if(!typingTimeout) {
+        // typing = true;
+        socket.emit('typing');
+    }
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+        typingTimeout = null;
+        socket.emit('stop typing');
+    }, 500);
+});
+
+socket.on('typing', () => {
+    console.log('User is typing...');
+    divTyping.classList.add('visible');
+});
+```
 
 
 ## Grading
