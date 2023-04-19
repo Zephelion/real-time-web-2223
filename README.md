@@ -139,9 +139,10 @@ socket.on('typing', () => {
     divTyping.classList.add('visible');
 });
 ```
+and whenever a user is typing something I add to the `divTyping ` element a class with visibible and thats it.
 
 
-## Grading
+<!-- ## Grading
 Your efforts will be graded using a single point rubric (see below). You will have to pass the criterion (centre column) to pass the course. During the test you will be consulted and will be given feedback on things we think deficient and things we think are an improvement on the criterion.
 
 | Deficiency | Criterion | Improvement |
@@ -150,6 +151,6 @@ Your efforts will be graded using a single point rubric (see below). You will ha
 |  | *Complexity* You’ve implemented enough real-time functionality for us to test your comprehension of the subject. A lot of functionality is self-written. You are able to manipulate online examples live. |  |
 |  | *Client-server interaction* By interacting with the app, a user can influence the data model of the server in real time by directly modifying data OR by influencing API requests between server and source. The student has set up the data manipulations. |  |
 |  | *Data management* The server maintains a data model and each client is continuously updated with the correct data. |  |
-|  | *Multi-user support* Multiple clients can connect to the server. Interaction works as expected and is not dependent on the number of clients. You can explain how your app approaches this. |  |
+|  | *Multi-user support* Multiple clients can connect to the server. Interaction works as expected and is not dependent on the number of clients. You can explain how your app approaches this. |  | -->
 
 
