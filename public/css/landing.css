@@ -1,0 +1,32 @@
+section.landing{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.landing section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+h1{
+    font-weight: 100;
+    font-size: 4em;
+    color: white;
+    margin-bottom: 25px;
+}
+
+a{
+    border: 1px solid white;
+    padding: 15px;
+    display: inline-block;
+    border-radius: 30px;
+    transition: 0.4s;
+}
+
+a:hover{
+    transform: scale(1.1);
+}
