@@ -1,3 +1,6 @@
+@import 'variables.css';
+
+
 *{
     margin: 0;
     padding: 0;
@@ -6,8 +9,10 @@
 
 body{
     font-family: 'Raleway', sans-serif;
+    background-color: var(--bg-dark);
 }
 
 h1{
     font-weight: 100;
+    color: white;
 }
