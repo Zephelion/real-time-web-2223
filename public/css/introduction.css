@@ -1,0 +1,47 @@
+section.introduction{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.introduction form{
+    display: flex;
+    flex-direction: column;
+    width: 35em;
+}
+
+section.introduction form label{
+    color: white;
+    font-weight: 500;
+}
+
+section.introduction form input{
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  transition: 0.6s;
+  border: none;
+  border-bottom: 1px solid #CCC;
+  background-color: transparent;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+section.introduction form input::placeholder{
+    color: rgba(255, 2555, 255, 0.5);
+    font-size: 1em;
+    font-weight: 100;
+}
+
+section.introduction form button{
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    transition: 0.6s;
+    border: 1px solid white;
+    border-bottom: 1px solid #CCC;
+    background-color: transparent;
+    outline: none;
+    color: white;
+}
