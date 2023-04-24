@@ -1,5 +1,6 @@
 import express from 'express';
 import http from 'http';
+import session from 'express-session';
 import { Server } from 'socket.io';
 
 import { engine } from 'express-handlebars';
@@ -17,6 +18,16 @@ const io = new Server(server);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+app.use(session({
+
+    secret: process.env.SESSION_SECRET,
+  
+    resave: false,
+  
+    saveUninitialized: true
+  
+}))
 
 app.engine('hbs', engine({extname: 'hbs'}));
 app.set('view engine', 'hbs');
