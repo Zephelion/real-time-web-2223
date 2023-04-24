@@ -11,22 +11,31 @@ section.landing section{
     align-items: center;
 }
 
-
-h1{
+section.landing section h1{
     font-weight: 100;
     font-size: 4em;
     color: white;
     margin-bottom: 25px;
 }
 
-a{
+section.landing section a{
     border: 1px solid white;
     padding: 15px;
     display: inline-block;
     border-radius: 30px;
     transition: 0.4s;
+    display: flex;
+    align-items: center;
 }
 
-a:hover{
+section.landing section a span{
+    margin-left: 10px;
+}
+
+section.landing section a span img{
+    width: 20px;
+}
+
+section.landing section a:hover{
     transform: scale(1.1);
 }

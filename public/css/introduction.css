@@ -3,6 +3,21 @@ section.introduction{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+section.introduction h2{
+    color: white;
+    font-size: 3em;
+    font-weight: 100;
+    margin-bottom: 20px;
+}
+
+section.introduction p{
+    color: white;
+    font-size: 1.5em;
+    font-weight: 100;
+    margin-bottom: 20px;
 }
 
 section.introduction form{
@@ -26,6 +41,13 @@ section.introduction form input{
   background-color: transparent;
   outline: none;
   margin-bottom: 20px;
+  color: white;
+}
+
+section.introduction form input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    /* -webkit-text-fill-color: white; */
+    color: white !important;
 }
 
 section.introduction form input::placeholder{
