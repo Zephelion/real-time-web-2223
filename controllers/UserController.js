@@ -37,7 +37,6 @@ export const login = (req, res) => {
 };
 
 export const rooms = (req, res) => {
-    console.log(req.session.access_token)
     res.render('rooms');
 };
 
