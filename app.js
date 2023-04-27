@@ -19,6 +19,10 @@ const io = new Server(server);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import { connectDB } from './config/db.js';
+
+connectDB();
+
 app.use(session({
 
     secret: process.env.SESSION_SECRET,
