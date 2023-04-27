@@ -19,9 +19,14 @@ const io = new Server(server);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const urlencodedParser = express.urlencoded({ extended: true });
+
 import { connectDB } from './config/db.js';
 
 connectDB();
+
+app.use(urlencodedParser);
+app.use(express.json());
 
 app.use(session({
 
