@@ -12,6 +12,10 @@ router.get('/introduction', introduction);
 router.get('/login', login);
 router.get('/callback', saveAccesToken);
 router.get('/rooms',isloggedIn, rooms);
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
 
 router.post('/createLobby', createLobby);
 

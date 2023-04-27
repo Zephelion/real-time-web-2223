@@ -21,13 +21,18 @@
         <h2>Create room</h2>
         <form action="/createlobby" method="post">
             <label for="roomName">Room name</label>
-            <input type="text" name="name" id="roomName" placeholder="Room name">
+            <input type="text" name="name" id="roomName" placeholder="Room name" required>
 
             <label for="roomDescription">Room description</label>
-            <input type="text" name="description" id="roomDescription" placeholder="Room description">
+            <input type="text" name="description" id="roomDescription" placeholder="Room description" required>
 
             <button type="Submit">Create room</button>
         </form>
     </div>
 </section>
+
+<a class="logout" href="/logout">
+    <img src="/assets/svg/logout.svg" alt="">
+
+</a>
 <script src="/js/modal.js"></script>
