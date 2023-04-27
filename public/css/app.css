@@ -2,7 +2,8 @@
 @import 'reset.css';
 @import 'landing.css';
 @import 'introduction.css';
-
+@import 'explore.css';
+@import 'modal.css';
 
 
 body {
