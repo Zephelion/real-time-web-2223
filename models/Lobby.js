@@ -11,6 +11,10 @@ const LobbySchema = new mongoose.Schema({
         required: true,
 
     },
+    user: {
+        type: String,
+        required: true,
+    },
 });
 
 export const Lobby = mongoose.model('Lobby', LobbySchema);

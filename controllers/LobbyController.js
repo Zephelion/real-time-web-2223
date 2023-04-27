@@ -1,12 +1,15 @@
 import { Lobby } from "../models/Lobby.js";
+import { spotifyApi } from "./UserController.js";
 
 export const createLobby = async (req, res) => {
 
-    console.log(req.body);
+    const data = await spotifyApi.getMe();
+
     const { name, description } = req.body;
     const lobby = new Lobby({
         name,
-        description
+        description,
+        user: data.body.display_name,
     });
     try {
         await lobby.save();

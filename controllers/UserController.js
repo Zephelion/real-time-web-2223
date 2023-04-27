@@ -37,6 +37,10 @@ export const login = (req, res) => {
 };
 
 export const rooms = (req, res) => {
+    // spotifyApi.getMe()
+    // .then(function(data) {
+    //     console.log('Some information about the authenticated user', data.body);
+    // })
     res.render('rooms');
 };
 
