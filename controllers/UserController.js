@@ -41,7 +41,7 @@ export const rooms = (req, res) => {
     res.render('rooms');
 };
 
-export const test = (req, res) => {
+export const saveAccesToken = (req, res) => {
     const code = req.query.code || null;
     spotifyApi.authorizationCodeGrant(code).then(data => {
         const {access_token, refresh_token} = data.body;

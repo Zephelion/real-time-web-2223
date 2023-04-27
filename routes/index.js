@@ -1,5 +1,5 @@
 import express from 'express';
-import { introduction, login, test, rooms } from '../controllers/UserController.js';
+import { introduction, login, saveAccesToken, rooms } from '../controllers/UserController.js';
 import { isloggedIn } from '../middleware/authorization.js';
 const router = express.Router();
 
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 router.get('/introduction', introduction);
 router.get('/login', login);
-router.get('/callback', test);
+router.get('/callback', saveAccesToken);
 router.get('/rooms',isloggedIn, rooms);
 
 
