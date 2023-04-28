@@ -5,10 +5,21 @@
     <section class="explore-heading">
         <h2>Explore</h2>
     </section>
+
+
     <section class="explore-rooms">
         <button class="add" href="#">
             <img src="/assets/svg/add.svg" alt="">
         </button>
+        <ul class="lobbies">
+            {{#each lobbies}}
+            <li>
+                <a href="/room/{{_id}}">{{name}}</a>
+                <p>{{description}}</p>
+                <p>Created by:{{user}}</p>
+            </li>
+            {{/each}}
+        </ul>
     </section>
 
     <div class="modal">
