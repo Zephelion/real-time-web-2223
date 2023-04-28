@@ -1,6 +1,6 @@
 import express from 'express';
 import { introduction, login, saveAccesToken, rooms } from '../controllers/UserController.js';
-import { createLobby } from '../controllers/LobbyController.js';
+import { createLobby, connectToLobby } from '../controllers/LobbyController.js';
 import { isloggedIn } from '../middleware/authorization.js';
 const router = express.Router();
 
@@ -12,6 +12,7 @@ router.get('/introduction', introduction);
 router.get('/login', login);
 router.get('/callback', saveAccesToken);
 router.get('/rooms',isloggedIn, rooms);
+router.get('/room/:id', connectToLobby);
 router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');

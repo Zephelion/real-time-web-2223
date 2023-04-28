@@ -18,3 +18,11 @@ export const createLobby = async (req, res) => {
         console.log(error);
     }
 };
+
+export const connectToLobby = async (req, res) => {
+    const lobby = await Lobby.findById(req.params.id).lean().then(lobby => {
+        res.render('lobby', { lobby });
+    });
+    // console.log(lobby);
+    // res.render('lobby', { lobby });
+};
