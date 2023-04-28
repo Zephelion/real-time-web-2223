@@ -1,5 +1,6 @@
 import querystring from 'querystring';
 import SpotifyWebApi from 'spotify-web-api-node';
+import { Lobby } from '../models/Lobby.js';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -37,11 +38,9 @@ export const login = (req, res) => {
 };
 
 export const rooms = (req, res) => {
-    // spotifyApi.getMe()
-    // .then(function(data) {
-    //     console.log('Some information about the authenticated user', data.body);
-    // })
-    res.render('rooms');
+    Lobby.find().lean().then(lobbies => {
+        res.render('rooms', { lobbies });
+    });
 };
 
 export const saveAccesToken = (req, res) => {
