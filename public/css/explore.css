@@ -19,6 +19,31 @@ section.explore-rooms{
     padding: 0px 30px 0px 30px;
 }
 
+section.explore-rooms ul.lobbies{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+section.explore-rooms ul.lobbies li{
+    border: 1px solid white;
+    color: white;
+    padding: 20px;
+}
+
+section.explore-rooms ul.lobbies li a{
+    /* border: 1px solid white; */
+    display: inline-block;
+    min-height: 10em;
+    min-width: 16em;
+}
+
+section.explore-rooms ul.lobbies li:hover{
+    transition: 0.4s;
+    transform: scale(1.1);
+}
+
 section.explore-rooms button.add{
     display: block;
     width: fit-content;
