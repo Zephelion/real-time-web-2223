@@ -7,6 +7,7 @@ import { engine } from 'express-handlebars';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import router from './routes/index.js';
+import { spotifyApi } from './controllers/UserController.js';
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -48,6 +49,16 @@ app.use('/', router);
 
 io.on('connection', (socket) => {
     console.log('A user connected');
+    
+    socket.on('joinRoom', async (roomId) => {
+        const data = await spotifyApi.getMe();
+        const name = data.body.display_name;
+
+        console.log(`${name} joined room ${roomId}`);
+        socket.join(roomId);
+        socket.broadcast.to(roomId).emit('message', name, roomId);
+    })
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });

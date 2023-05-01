@@ -1,13 +1,7 @@
-import express from "express";
 import { Lobby } from "../models/Lobby.js";
 import { UserLobby } from "../models/UserLobby.js";
 import { spotifyApi } from "./UserController.js";
-import http from 'http';
-import { Server } from 'socket.io';
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
 
 
 export const createLobby = async (req, res) => {
@@ -29,8 +23,9 @@ export const createLobby = async (req, res) => {
 };
 
 export const connectToLobby = async (req, res) => {
+    // console.log(req.query.id);
 
-    const lobby = await Lobby.findById(req.params.id).lean().then(lobby => {
+    const lobby = await Lobby.findById(req.query.id).lean().then(lobby => {
         res.render('lobby', { lobby });
     });
 };

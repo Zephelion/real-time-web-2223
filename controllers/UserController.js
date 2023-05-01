@@ -17,7 +17,7 @@ export const spotifyApi = new SpotifyWebApi({
     clientId: clientId,
     clientSecret: clientSecret,
     redirectUri: 'http://localhost:3000/callback'
-  });
+});
 
 
 const generateRandomString = (length) => {

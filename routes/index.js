@@ -12,7 +12,7 @@ router.get('/introduction', introduction);
 router.get('/login', login);
 router.get('/callback', saveAccesToken);
 router.get('/rooms',isloggedIn, rooms);
-router.get('/room/:id', connectToLobby);
+router.get('/room', connectToLobby);
 router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');

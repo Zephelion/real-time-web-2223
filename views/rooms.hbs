@@ -14,7 +14,7 @@
         <ul class="lobbies">
             {{#each lobbies}}
             <li>
-                <a href="/room/{{_id}}">{{name}}</a>
+                <a class="join" href="/room?id={{_id}}">{{name}}</a>
                 <p>{{description}}</p>
                 <p>Created by:{{user}}</p>
             </li>
