@@ -1,5 +1,12 @@
 <section class="lobby">
     <section>
         <h2>{{lobby.name}}</h2>
+        <a class="leave-room" href="/rooms">Leave Lobby</a>
+        <ul class="participants">
+            <h3>Participants:</h3>
+            {{#each users}}
+                <li>{{user}}</li>
+            {{/each}}
+        </ul>
     </section>
 </section>

@@ -24,8 +24,19 @@ export const createLobby = async (req, res) => {
 
 export const connectToLobby = async (req, res) => {
     // console.log(req.query.id);
-
-    const lobby = await Lobby.findById(req.query.id).lean().then(lobby => {
-        res.render('lobby', { lobby });
+    
+    UserLobby.find({ lobby: req.query.id }).lean().then(async users => {
+        const lobby = await Lobby.findById(req.query.id).lean().then(lobby => {
+            res.render('lobby', { lobby, users });
+            // if(users.length > 0) {
+            //     console.log(users);
+            // }else{
+            //     console.log('No participants currently in this room');
+            // }
+        });
     });
+
+    // const lobby = await Lobby.findById(req.query.id).lean().then(lobby => {
+    //     res.render('lobby', { lobby });
+    // });
 };

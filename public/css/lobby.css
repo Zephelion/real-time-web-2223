@@ -6,3 +6,13 @@ section.lobby section h2{
     color: white;
     font-weight: 100;
 }
+
+a.leave-room{
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    border-radius: 40px;
+    border: 1px solid white;
+}

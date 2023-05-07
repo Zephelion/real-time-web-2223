@@ -8,6 +8,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import router from './routes/index.js';
 import { spotifyApi } from './controllers/UserController.js';
+import { UserLobby } from './models/UserLobby.js';
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -51,17 +52,42 @@ io.on('connection', (socket) => {
     console.log('A user connected');
     
     socket.on('joinRoom', async (roomId) => {
+
         const data = await spotifyApi.getMe();
         const name = data.body.display_name;
 
-        console.log(`${name} joined room ${roomId}`);
-        socket.join(roomId);
-        socket.broadcast.to(roomId).emit('message', name, roomId);
+        const userLobby = new UserLobby({
+            user: name,
+            lobby: roomId,
+        });
+        try{
+            await userLobby.save();
+            console.log(`${name} joined room ${roomId}`);
+            socket.join(roomId);
+            socket.broadcast.to(roomId).emit('message', name, roomId);
+        } catch (error) {
+            console.log(error);
+        }
+
     })
 
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
+    socket.on('leaveRoom', async (roomId) => {
+        const data = await spotifyApi.getMe();
+        const name = data.body.display_name;
+
+        try{
+            await UserLobby.deleteOne({ user: name, lobby: roomId });
+            console.log(`${name} left room ${roomId}`);
+            socket.leave(roomId);
+            socket.broadcast.to(roomId).emit('message', name, roomId);
+        } catch (error) {
+            console.log(error);
+        }
     });
+
+    // socket.on('disconnect', () => {
+    //     console.log('User disconnected');
+    // });
     
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
