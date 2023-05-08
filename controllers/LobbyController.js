@@ -8,6 +8,8 @@ export const createLobby = async (req, res) => {
 
     const data = await spotifyApi.getMe();
 
+    console.log(data);
+
     const { name, description } = req.body;
     const lobby = new Lobby({
         name,

@@ -56,25 +56,45 @@ io.on('connection', (socket) => {
         const data = await spotifyApi.getMe();
         const name = data.body.display_name;
 
-        const userLobby = new UserLobby({
-            user: name,
-            lobby: roomId,
-        });
-        try{
-            await userLobby.save();
-            console.log(`${name} joined room ${roomId}`);
-            socket.join(roomId);
-            socket.broadcast.to(roomId).emit('message', name, roomId);
-        } catch (error) {
-            console.log(error);
-        }
+        socket.join(roomId);
+        socket.broadcast.to(roomId).emit('message', name, roomId);
 
+        UserLobby.findOne({ user: name, lobby: roomId}).then((user) => {
+            if(!user){
+                console.log('User not found')
+                const userLobby = new UserLobby({
+                    user: name,
+                    lobby: roomId,
+                });
+                userLobby.save().then(() => {
+                    console.log(`${name} joined room ${roomId}`);
+                });
+            }else{
+                console.log('User already exists');
+                user.socketId = socket.id;
+                user.save().then(() => {
+                    console.log(`${name} rejoined room ${roomId}`);
+                });
+            }
+        });
     })
 
-    socket.on('leaveRoom', async (roomId) => {
+    socket.on('leaveRoom', async (roomId)  => {
         const data = await spotifyApi.getMe();
         const name = data.body.display_name;
 
+        deleteUser(name, roomId);
+    });
+
+    socket.on('disconnect', async () => {
+        // const data = await spotifyApi.getMe();
+        // const name = data.body.display_name;
+        // const roomId = req.params.id;
+
+        // deleteUser(name, roomId);
+    });
+
+    const deleteUser = async (name, roomId) => {
         try{
             await UserLobby.deleteOne({ user: name, lobby: roomId });
             console.log(`${name} left room ${roomId}`);
@@ -83,11 +103,8 @@ io.on('connection', (socket) => {
         } catch (error) {
             console.log(error);
         }
-    });
+    }
 
-    // socket.on('disconnect', () => {
-    //     console.log('User disconnected');
-    // });
     
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
