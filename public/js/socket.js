@@ -4,6 +4,20 @@ const urlParams = new URLSearchParams(queryString);
 const roomId = urlParams.get('id');
 const leaveRoomBtn = document.querySelector('.leave-room');
 const participants = document.querySelector('.participants');
+const playBtn = document.getElementById('playBtn');
+
+const script = document.createElement('script');
+script.src = "https://sdk.scdn.co/spotify-player.js";
+script.async = true;
+document.body.appendChild(script);
+
+window.onSpotifyWebPlaybackSDKReady = () => {
+    const player = new Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { cb(token); }
+        
+    });
+};
 
 
 var socket = io();
@@ -21,4 +35,8 @@ socket.on('message', (name, roomId) => {
 
 leaveRoomBtn.addEventListener('click', () => {
     socket.emit('leaveRoom', roomId);
+});
+
+playBtn.addEventListener('click', () => {
+    console.log('play button clicked')
 });

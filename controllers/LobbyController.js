@@ -4,6 +4,7 @@ import { spotifyApi } from "./UserController.js";
 
 
 
+
 export const createLobby = async (req, res) => {
 
     const data = await spotifyApi.getMe();
@@ -28,7 +29,11 @@ export const connectToLobby = async (req, res) => {
     // console.log(req.query.id);
     
     UserLobby.find({ lobby: req.query.id }).lean().then(async users => {
-        const lobby = await Lobby.findById(req.query.id).lean().then(lobby => {
+        const lobby = await Lobby.findById(req.query.id).lean().then(async lobby => {
+            // const data = await spotifyApi.getMySavedTracks();
+            // console.log(data.body.items);
+
+
             res.render('lobby', { lobby, users });
             // if(users.length > 0) {
             //     console.log(users);
