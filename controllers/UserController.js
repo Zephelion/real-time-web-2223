@@ -32,12 +32,13 @@ const generateRandomString = (length) => {
 
 
 export const login = (req, res) => {
-    const scopes = ['user-read-private', 'user-read-email'];
+    const scopes = ['user-read-private', 'user-read-email', 'user-read-playback-state', 'user-modify-playback-state', 'user-library-read', 'user-library-modify', 'playlist-read-private', 'playlist-modify-private', 'playlist-modify-public', 'streaming'];
     const authorizeUrl = spotifyApi.createAuthorizeURL(scopes);
     res.redirect(authorizeUrl);
 };
 
 export const rooms = (req, res) => {
+
     Lobby.find().lean().then(lobbies => {
         res.render('rooms', { lobbies });
     });
@@ -49,6 +50,8 @@ export const saveAccesToken = (req, res) => {
         const {access_token, refresh_token} = data.body;
         spotifyApi.setAccessToken(access_token);
         spotifyApi.setRefreshToken(refresh_token);
+
+        console.log(access_token);
 
         session = req.session;
         session.access_token = access_token;

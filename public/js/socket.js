@@ -5,6 +5,9 @@ const roomId = urlParams.get('id');
 const leaveRoomBtn = document.querySelector('.leave-room');
 const participants = document.querySelector('.participants');
 const playBtn = document.getElementById('playBtn');
+const lobbySection = document.querySelector('.lobby-container');
+
+console.log(lobbySection.dataset.token)
 
 const script = document.createElement('script');
 script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -12,12 +15,41 @@ script.async = true;
 document.body.appendChild(script);
 
 window.onSpotifyWebPlaybackSDKReady = () => {
+    const token = lobbySection.dataset.token;
+
     const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
         
     });
+
+    player.addListener('ready', ({ device_id }) => {
+        console.log('Ready with Device ID', device_id);
+    });
+
+    player.addListener('not_ready', ({ device_id }) => {
+        console.log('Device ID has gone offline', device_id);
+    });
+
+    player.addListener('initialization_error', ({ message }) => {
+        console.error(message);
+    });
+  
+    player.addListener('authentication_error', ({ message }) => {
+        console.error(message);
+    });
+  
+    player.addListener('account_error', ({ message }) => {
+        console.error(message);
+    });
+
+    player.connect();
+
+    playBtn.addEventListener('click', (e) => {
+        player.togglePlay();
+    });
 };
+
 
 
 var socket = io();
@@ -35,8 +67,4 @@ socket.on('message', (name, roomId) => {
 
 leaveRoomBtn.addEventListener('click', () => {
     socket.emit('leaveRoom', roomId);
-});
-
-playBtn.addEventListener('click', () => {
-    console.log('play button clicked')
 });

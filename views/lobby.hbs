@@ -4,7 +4,7 @@
             <h2>{{lobby.name}}</h2>
         </section>
         <a class="leave-room" href="/rooms">Leave Lobby</a>
-        <section class="lobby-container">
+        <section data-token="{{token}}" class="lobby-container">
             <ul class="participants">
                 <h3>Participants:</h3>
                 {{#each users}}
