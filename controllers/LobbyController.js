@@ -47,6 +47,19 @@ export const connectToLobby = async (req, res) => {
     // });
 };
 
+const throttle = (func, limit) => {
+    let inThrottle
+    return function() {
+        const args = arguments
+        const context = this
+        if (!inThrottle) {
+        func.apply(context, args)
+        inThrottle = true
+        setTimeout(() => inThrottle = false, limit)
+        }
+    }
+}
+
 export const insertCurrentSong = async (req, res) => {
     const currentSong = req.params.currentSong;
     const roomId = req.params.roomId;
@@ -61,3 +74,5 @@ export const insertCurrentSong = async (req, res) => {
         });
     });
 };
+
+export const insertCurrentSongThrottle = throttle(insertCurrentSong, 5000);

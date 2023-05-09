@@ -1,4 +1,3 @@
-// var roomId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const roomId = urlParams.get('id');
@@ -11,13 +10,15 @@ const lobbySection = document.querySelector('.lobby-container');
 
 var socket = io();
 
+let currentSong;
+
 if(roomId) {
     socket.emit('joinRoom', roomId);
 }
 
-
-
-
+if(currentSong) {
+    console.log('Current song is: ' + currentSong);
+}
 
 const script = document.createElement('script');
 script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -51,7 +52,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     socket.on('play', (roomId, uri) => {
         player.togglePlay();
         player.getCurrentState().then(async state => {
-            const currentSong = state.track_window.current_track.uri;
+            console.log(state);
+            currentSong = state.track_window.current_track.uri;
             console.log(currentSong);
             await fetch(`/currentsong/${currentSong}/${roomId}` , {
                 method: 'PUT',
