@@ -15,12 +15,7 @@ if(roomId) {
     socket.emit('joinRoom', roomId);
 }
 
-socket.on('message', (name, roomId) => {
-    const li = document.createElement('li');
-    li.textContent = name;
-    participants.appendChild(li);
-    console.log(`${name} joined room ${roomId}`);
-});
+
 
 
 
@@ -38,36 +33,76 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         
     });
 
-    player.addListener('ready', ({ device_id }) => {
+    player.addListener('ready', async ({ device_id }) => {
         console.log('Ready with Device ID', device_id);
+        await fetch(`https://api.spotify.com/v1/me/player`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                device_ids: [device_id],
+                play: false,
+            }),
+        });
     });
 
 
     socket.on('play', (roomId, uri) => {
-        console.log(roomId, uri);
         player.togglePlay();
-        // player.play({
-        //     uris: [uri]
-        // });
+        player.getCurrentState().then(async state => {
+            const currentSong = state.track_window.current_track.uri;
+            console.log(currentSong);
+            await fetch(`/currentsong/${currentSong}/${roomId}` , {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    currentSong,
+                }),
+            })
+        });
+    });
+
+    socket.on('message', (name, roomId, currentSong) => {
+        console.log('Song currently playing: ', currentSong);
+        const li = document.createElement('li');
+        li.textContent = name;
+        participants.appendChild(li);
+        console.log(`${name} joined room ${roomId}`);
     });
 
     player.addListener('player_state_changed', (state) => {
         if(!state) {
             return;
         }
-
-        const { uri } = state.track_window.current_track;
+        // const { uri } = state.track_window.current_track;
         // socket.emit('play', roomId, uri);
     })
 
         
-    playBtn.addEventListener('click', (e) => {
+    playBtn.addEventListener('click', async (e) => {
         socket.emit('play', roomId, 'spotify:track:2yr2HnFYl7XvqJk4fXoQBt');
         // player.togglePlay();
     });
 
     nextBtn.addEventListener('click', (e) => {
-        player.nextTrack();
+        player.nextTrack().then(() => {
+            player.getCurrentState().then(async state => {
+                const currentSong = state.track_window.current_track.uri;
+                console.log(currentSong);
+                await fetch(`/currentsong/${currentSong}/${roomId}` , {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        currentSong,
+                    }),
+                })
+            });
+        });
     });
 
     previousBtn.addEventListener('click', (e) => {

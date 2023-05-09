@@ -15,6 +15,9 @@ const LobbySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    currentsong: {
+        type: String,
+    },
 });
 
 export const Lobby = mongoose.model('Lobby', LobbySchema);

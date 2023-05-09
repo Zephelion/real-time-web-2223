@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import router from './routes/index.js';
 import { spotifyApi } from './controllers/UserController.js';
 import { UserLobby } from './models/UserLobby.js';
+import { Lobby } from './models/Lobby.js';
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -57,7 +58,10 @@ io.on('connection', (socket) => {
         const name = data.body.display_name;
 
         socket.join(roomId);
-        socket.broadcast.to(roomId).emit('message', name, roomId);
+        const lobby = await Lobby.findById(roomId).lean()
+        const currentSong = lobby.currentsong;
+
+        socket.broadcast.to(roomId).emit('message', name, roomId, currentSong);
 
         UserLobby.findOne({ user: name, lobby: roomId}).then((user) => {
             if(!user){
@@ -95,7 +99,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('play', (roomId, uri) => {
-        console.log(roomId, uri);
+        // console.log(roomId, uri);
         io.to(roomId).emit('play', roomId, uri);
 
     });

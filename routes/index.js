@@ -1,6 +1,6 @@
 import express from 'express';
 import { introduction, login, saveAccesToken, rooms } from '../controllers/UserController.js';
-import { createLobby, connectToLobby } from '../controllers/LobbyController.js';
+import { createLobby, connectToLobby, insertCurrentSong } from '../controllers/LobbyController.js';
 import { isloggedIn } from '../middleware/authorization.js';
 const router = express.Router();
 
@@ -19,6 +19,7 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/createLobby', createLobby);
+router.put('/currentsong/:currentSong/:roomId', insertCurrentSong);
 
 
 

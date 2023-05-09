@@ -46,3 +46,18 @@ export const connectToLobby = async (req, res) => {
     //     res.render('lobby', { lobby });
     // });
 };
+
+export const insertCurrentSong = async (req, res) => {
+    const currentSong = req.params.currentSong;
+    const roomId = req.params.roomId;
+
+    console.log(currentSong);
+    
+    Lobby.findById(roomId).then(lobby => {
+        lobby.currentsong = currentSong;
+        lobby.save().then(() => {
+            res.status(200).json({ message: 'Current song updated' });
+
+        });
+    });
+};
