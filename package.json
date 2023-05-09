@@ -108,6 +108,7 @@
     "socket.io-parser": "^4.2.2",
     "source-map": "^0.6.1",
     "spotify-web-api-node": "^5.0.2",
+    "spotify-web-playback": "^1.4.0",
     "statuses": "^2.0.1",
     "supports-color": "^5.5.0",
     "to-regex-range": "^5.0.1",

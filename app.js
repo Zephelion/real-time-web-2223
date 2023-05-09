@@ -49,7 +49,7 @@ app.use(express.static('public'));
 app.use('/', router);
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    // console.log('A user connected');
     
     socket.on('joinRoom', async (roomId) => {
 
@@ -92,6 +92,12 @@ io.on('connection', (socket) => {
         // const roomId = req.params.id;
 
         // deleteUser(name, roomId);
+    });
+
+    socket.on('play', (roomId, uri) => {
+        console.log(roomId, uri);
+        io.to(roomId).emit('play', roomId, uri);
+
     });
 
     const deleteUser = async (name, roomId) => {

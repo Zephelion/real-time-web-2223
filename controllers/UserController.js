@@ -51,8 +51,6 @@ export const saveAccesToken = (req, res) => {
         spotifyApi.setAccessToken(access_token);
         spotifyApi.setRefreshToken(refresh_token);
 
-        console.log(access_token);
-
         session = req.session;
         session.access_token = access_token;
 

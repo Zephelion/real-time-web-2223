@@ -5,9 +5,24 @@ const roomId = urlParams.get('id');
 const leaveRoomBtn = document.querySelector('.leave-room');
 const participants = document.querySelector('.participants');
 const playBtn = document.getElementById('playBtn');
+const nextBtn = document.getElementById('nextBtn');
+const previousBtn = document.getElementById('previousBtn');
 const lobbySection = document.querySelector('.lobby-container');
 
-console.log(lobbySection.dataset.token)
+var socket = io();
+
+if(roomId) {
+    socket.emit('joinRoom', roomId);
+}
+
+socket.on('message', (name, roomId) => {
+    const li = document.createElement('li');
+    li.textContent = name;
+    participants.appendChild(li);
+    console.log(`${name} joined room ${roomId}`);
+});
+
+
 
 const script = document.createElement('script');
 script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -27,50 +42,47 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         console.log('Ready with Device ID', device_id);
     });
 
-    player.addListener('not_ready', ({ device_id }) => {
-        console.log('Device ID has gone offline', device_id);
+
+    socket.on('play', (roomId, uri) => {
+        console.log(roomId, uri);
+        player.togglePlay();
+        // player.play({
+        //     uris: [uri]
+        // });
     });
 
-    player.addListener('initialization_error', ({ message }) => {
-        console.error(message);
+    player.addListener('player_state_changed', (state) => {
+        if(!state) {
+            return;
+        }
+
+        const { uri } = state.track_window.current_track;
+        // socket.emit('play', roomId, uri);
+    })
+
+        
+    playBtn.addEventListener('click', (e) => {
+        socket.emit('play', roomId, 'spotify:track:2yr2HnFYl7XvqJk4fXoQBt');
+        // player.togglePlay();
     });
-  
-    player.addListener('authentication_error', ({ message }) => {
-        console.error(message);
+
+    nextBtn.addEventListener('click', (e) => {
+        player.nextTrack();
     });
-  
-    player.addListener('account_error', ({ message }) => {
-        console.error(message);
+
+    previousBtn.addEventListener('click', (e) => {
+        player.previousTrack();
     });
 
     player.connect();
 
-    playBtn.addEventListener('click', (e) => {
-        player.togglePlay();
-    });
-
-    player.addListener('player_state_changed', (state) => {
-        console.log(state);
-        console.log('Current track:', state.track_window.current_track.name);
-        console.log('Playback state:', state.paused ? 'paused' : 'playing');
-    })
 };
 
-
-
-var socket = io();
-
-if(roomId) {
-    socket.emit('joinRoom', roomId);
-}
-
-socket.on('message', (name, roomId) => {
-    const li = document.createElement('li');
-    li.textContent = name;
-    participants.appendChild(li);
-    console.log(`${name} joined room ${roomId}`);
-});
 
 leaveRoomBtn.addEventListener('click', () => {
     socket.emit('leaveRoom', roomId);
 });
+
+
+
+
