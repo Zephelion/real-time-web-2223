@@ -48,6 +48,12 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     playBtn.addEventListener('click', (e) => {
         player.togglePlay();
     });
+
+    player.addListener('player_state_changed', (state) => {
+        console.log(state);
+        console.log('Current track:', state.track_window.current_track.name);
+        console.log('Playback state:', state.paused ? 'paused' : 'playing');
+    })
 };
 
 

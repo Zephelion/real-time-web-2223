@@ -33,13 +33,32 @@ section.lobby section.lobby-container ul.participants li{
     font-weight: 200;
 }
 
-button#playBtn{
+section.controller{
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 25px;
-    border-radius: 40px;
+    display: flex;
+    gap: 35px;
+}
+
+section.controller button{
+    background-color: white;
+    border-radius: 50%;
+    width: 5em;
+    height: 5em;
+}
+
+section.controller button img{
+    height: 60%;
+}
+
+section.controller button:nth-of-type(3) img{
+    transform: rotate(180deg);
+}
+
+button#playBtn{
+    border-radius: 50%;
     background-color: white;
     border: 1px solid white;
 }
