@@ -16,10 +16,6 @@ if(roomId) {
     socket.emit('joinRoom', roomId);
 }
 
-if(currentSong) {
-    console.log('Current song is: ' + currentSong);
-}
-
 const script = document.createElement('script');
 script.src = "https://sdk.scdn.co/spotify-player.js";
 script.async = true;
@@ -27,6 +23,8 @@ document.body.appendChild(script);
 
 window.onSpotifyWebPlaybackSDKReady = () => {
     const token = lobbySection.dataset.token;
+
+    console.log(token);
 
     const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
