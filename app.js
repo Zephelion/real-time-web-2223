@@ -57,6 +57,8 @@ io.on('connection', (socket) => {
         const data = await spotifyApi.getMe();
         const name = data.body.display_name;
 
+        console.log(name);
+
         socket.join(roomId);
         const lobby = await Lobby.findById(roomId).lean()
         const currentSong = lobby.currentsong;
