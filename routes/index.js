@@ -14,7 +14,7 @@ router.get('/callback', saveAccesToken);
 router.get('/rooms',isloggedIn, rooms);
 router.get('/room', connectToLobby);
 router.get('/logout', (req, res) => {
-    req.session.destroy();
+    req.session.acces_token = null;
     res.redirect('/');
 });
 

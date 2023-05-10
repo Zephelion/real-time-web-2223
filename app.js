@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
-import session from 'express-session';
+// import session from 'express-session';
+import cookieSession from 'cookie-session';
 import { Server } from 'socket.io';
 
 import { engine } from 'express-handlebars';
@@ -31,15 +32,21 @@ connectDB();
 app.use(urlencodedParser);
 app.use(express.json());
 
-app.use(session({
+// app.use(session({
 
-    secret: process.env.SESSION_SECRET,
+//     secret: process.env.SESSION_SECRET,
   
-    resave: false,
+//     resave: false,
   
-    saveUninitialized: true
+//     saveUninitialized: true
   
-}))
+// }))
+
+app.use(cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 app.engine('hbs', engine({extname: 'hbs'}));
 app.set('view engine', 'hbs');
@@ -55,9 +62,9 @@ io.on('connection', (socket) => {
     socket.on('joinRoom', async (roomId) => {
 
         const data = await spotifyApi.getMe();
+        // console.log(data.body);
         const name = data.body.display_name;
 
-        console.log(name);
 
         socket.join(roomId);
         const lobby = await Lobby.findById(roomId).lean()

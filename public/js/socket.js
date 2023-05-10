@@ -67,6 +67,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
 
     socket.on('message', (name, roomId, currentSong) => {
+        console.log('Message received: ', name, roomId);
         console.log('Song currently playing: ', currentSong);
         const li = document.createElement('li');
         li.textContent = name;
