@@ -16,7 +16,7 @@ export const introduction = (req, res) => {
 export const spotifyApi = new SpotifyWebApi({
     clientId: clientId,
     clientSecret: clientSecret,
-    redirectUri: 'http://localhost:3000/callback'
+    redirectUri: '/callback'
 });
 
 
