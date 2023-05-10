@@ -46,6 +46,25 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         });
     });
 
+    // Error handling
+    player.addListener('not_ready', ({ device_id }) => {
+        console.log('Device ID has gone offline', device_id);
+    });
+
+    player.addListener('initialization_error', ({ message }) => {
+        console.error(message);
+    });
+  
+    player.addListener('authentication_error', ({ message }) => {
+        console.error(message);
+    });
+  
+    player.addListener('account_error', ({ message }) => {
+        console.error(message);
+    });
+
+
+
 
     socket.on('play', (roomId, uri) => {
         player.togglePlay();
