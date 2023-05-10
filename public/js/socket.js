@@ -41,7 +41,30 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             },
             body: JSON.stringify({
                 device_ids: [device_id],
-                play: false,
+                play: true,
+            }),
+        });
+
+        const response = await fetch (`/getcurrentsong/${roomId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        const data = await response.json();
+        currentSong = data.currentSong;
+
+        console.log(currentSong);
+
+        await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                uris: [currentSong],
             }),
         });
     });
@@ -70,7 +93,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         player.togglePlay();
         player.getCurrentState().then(async state => {
             console.log(state);
-            currentSong = state.track_window.current_track.uri;
+            // currentSong = state.track_window.current_track.uri;
             console.log(currentSong);
             await fetch(`/currentsong/${currentSong}/${roomId}` , {
                 method: 'PUT',
@@ -82,6 +105,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
                     currentSong,
                 }),
             })
+
         });
     });
 

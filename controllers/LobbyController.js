@@ -29,8 +29,8 @@ export const connectToLobby = async (req, res) => {
     
     UserLobby.find({ lobby: req.query.id }).lean().then(async users => {
         const lobby = await Lobby.findById(req.query.id).lean().then(async lobby => {
-            // const data = await spotifyApi.getMySavedTracks();
-            console.log(req.session.access_token);
+            const data = await spotifyApi.getMySavedTracks();
+    
             res.render('lobby', { lobby, users, token: req.session.access_token });
         });
     });
@@ -69,3 +69,11 @@ export const insertCurrentSong = async (req, res) => {
 };
 
 export const insertCurrentSongThrottle = throttle(insertCurrentSong, 5000);
+
+export const getCurrentSong = async (req, res) => {
+    const roomId = req.params.roomId;
+
+    Lobby.findById(roomId).then(lobby => {
+        res.status(200).json({ currentSong: lobby.currentsong });
+    });
+};

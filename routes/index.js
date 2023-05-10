@@ -1,6 +1,6 @@
 import express from 'express';
 import { introduction, login, saveAccesToken, rooms } from '../controllers/UserController.js';
-import { createLobby, connectToLobby, insertCurrentSong, insertCurrentSongThrottle } from '../controllers/LobbyController.js';
+import { createLobby, connectToLobby, insertCurrentSongThrottle, getCurrentSong } from '../controllers/LobbyController.js';
 import { isloggedIn } from '../middleware/authorization.js';
 const router = express.Router();
 
@@ -17,6 +17,7 @@ router.get('/logout', (req, res) => {
     req.session.acces_token = null;
     res.redirect('/');
 });
+router.get('/getcurrentsong/:roomId', getCurrentSong);
 
 router.post('/createLobby', createLobby);
 router.put('/currentsong/:currentSong/:roomId', insertCurrentSongThrottle);
