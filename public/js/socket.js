@@ -41,7 +41,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             },
             body: JSON.stringify({
                 device_ids: [device_id],
-                play: true,
+                play: false,
             }),
         });
 
