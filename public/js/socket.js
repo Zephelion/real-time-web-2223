@@ -64,7 +64,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             const data = await response.json();
             currentSong = data.currentSong;
     
-            console.log(currentSong);
     
             await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
                 method: 'PUT',
