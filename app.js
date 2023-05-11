@@ -118,7 +118,7 @@ io.on('connection', (socket) => {
             await UserLobby.deleteOne({ user: name, lobby: roomId });
             console.log(`${name} left room ${roomId}`);
             socket.leave(roomId);
-            socket.emit('leaveRoom', name);
+            socket.emit('leaveRoom', name, roomId);
         } catch (error) {
             console.log(error);
         }
