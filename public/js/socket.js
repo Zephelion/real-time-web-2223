@@ -171,7 +171,7 @@ leaveRoomBtn.addEventListener('click', () => {
     socket.emit('leaveRoom', roomId, localStorage.getItem('name'));
 });
 
-socket.on('leaveRoom', (name, roomId) => {
+socket.on('leave-room', (name, roomId) => {
     console.log(`${name} left room ${roomId}`);
     // const participantList = document.querySelectorAll('ul.participants li');
 
