@@ -173,19 +173,15 @@ leaveRoomBtn.addEventListener('click', () => {
 
 socket.on('leave-room', (name, roomId) => {
     console.log(`${name} left room ${roomId}`);
-    // const participantList = document.querySelectorAll('ul.participants li');
+    const participantList = document.querySelectorAll('ul.participants li');
 
-    // participantList.filter((participant) => {
-    //     if(participant.textContent === name) {
-    //         console.log('Participant found');
-    //         participant.remove();
-    //     }
-    // });
+    participantList.filter((participant) => {
+        if(participant.textContent === name) {
+            console.log('Participant found');
+            participant.remove();
+        }
+    });
 });
-
-socket.on('leaveRoom', (name, roomId) => {
-    colog(`${name} left room ${roomId}`);
-})
 
 
 
