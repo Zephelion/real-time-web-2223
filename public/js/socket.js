@@ -65,6 +65,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             },
             body: JSON.stringify({
                 uris: [currentSong],
+                play: false,
             }),
         });
     });
