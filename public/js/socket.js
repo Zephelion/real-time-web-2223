@@ -183,6 +183,10 @@ socket.on('leave-room', (name, roomId) => {
     // });
 });
 
+socket.on('leaveRoom', (name, roomId) => {
+    colog(`${name} left room ${roomId}`);
+})
+
 
 
 

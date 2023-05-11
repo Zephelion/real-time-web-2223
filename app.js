@@ -98,7 +98,8 @@ io.on('connection', (socket) => {
 
         await deleteUser(name, roomId);
         console.log(`${name} left room ${roomId}`)
-        socket.emit('leave-room', name, roomId);
+        socket.to(roomId).emit('leave-room', name, roomId);
+        socket.emit('leaveRoom', name, roomId);
     });
 
     socket.on('disconnect', async () => {
