@@ -135,8 +135,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     nextBtn.addEventListener('click', (e) => {
         player.nextTrack().then(() => {
             player.getCurrentState().then(async state => {
-                const currentSong = state.track_window.current_track.uri;
                 console.log(currentSong);
+                currentSong = state.track_window.current_track.uri;
                 await fetch(`/currentsong/${currentSong}/${roomId}` , {
                     method: 'PUT',
                     headers: {
