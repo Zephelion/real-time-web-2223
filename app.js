@@ -97,6 +97,7 @@ io.on('connection', (socket) => {
         // const name = data.body.display_name;
 
         await deleteUser(name, roomId);
+        console.log(`${name} left room ${roomId}`)
         socket.emit('leaveRoom', name, roomId);
     });
 
@@ -118,7 +119,6 @@ io.on('connection', (socket) => {
         try{
             await UserLobby.deleteOne({ user: name, lobby: roomId });
             socket.leave(roomId);
-            console.log(`${name} left room ${roomId}`);
             return
         } catch (error) {
             console.log(error);
