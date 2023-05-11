@@ -1,5 +1,5 @@
 import express from 'express';
-import { introduction, login, saveAccesToken, rooms } from '../controllers/UserController.js';
+import { introduction, login, saveAccesToken, rooms, saveCredentials } from '../controllers/UserController.js';
 import { createLobby, connectToLobby, insertCurrentSongThrottle, getCurrentSong } from '../controllers/LobbyController.js';
 import { isloggedIn } from '../middleware/authorization.js';
 const router = express.Router();
@@ -18,6 +18,7 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 router.get('/getcurrentsong/:roomId', getCurrentSong);
+router.get('/savecredentials', saveCredentials);
 
 router.post('/createLobby', createLobby);
 router.put('/currentsong/:currentSong/:roomId', insertCurrentSongThrottle);

@@ -54,9 +54,18 @@ export const saveAccesToken = (req, res) => {
         session = req.session;
         session.access_token = access_token;
 
-        res.redirect('/rooms');
+        spotifyApi.getMe().then(data => {
+
+            res.redirect('/savecredentials?name=' + data.body.display_name);
+        })
+
         })
         .catch(err => {
             console.log('Something went wrong!', err);
         });
+}
+
+export const saveCredentials = (req, res) => {
+    
+    res.render('savecredentials');
 }

@@ -59,11 +59,11 @@ app.use('/', router);
 io.on('connection', (socket) => {
     // console.log('A user connected');
     
-    socket.on('joinRoom', async (roomId) => {
+    socket.on('joinRoom', async (roomId, name) => {
 
-        const data = await spotifyApi.getMe();
-        console.log(data.body);
-        const name = data.body.display_name;
+        // const data = await spotifyApi.getMe();
+        // console.log(data.body);
+        // const name = data.body.display_name;
 
 
         socket.join(roomId);
@@ -92,9 +92,9 @@ io.on('connection', (socket) => {
         });
     })
 
-    socket.on('leaveRoom', async (roomId)  => {
-        const data = await spotifyApi.getMe();
-        const name = data.body.display_name;
+    socket.on('leaveRoom', async (roomId, name)  => {
+        // const data = await spotifyApi.getMe();
+        // const name = data.body.display_name;
 
         await deleteUser(name, roomId);
         socket.emit('leaveRoom', name, roomId);

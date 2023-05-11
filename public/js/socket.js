@@ -7,13 +7,20 @@ const playBtn = document.getElementById('playBtn');
 const nextBtn = document.getElementById('nextBtn');
 const previousBtn = document.getElementById('previousBtn');
 const lobbySection = document.querySelector('.lobby-container');
+const user = urlParams.get('name');
+
 
 var socket = io();
 
 let currentSong;
 
 if(roomId) {
-    socket.emit('joinRoom', roomId);
+    socket.emit('joinRoom', roomId, localStorage.getItem('name'));
+}
+
+if(user){
+    localStorage.setItem('name', user);
+    window.location.href = '/rooms';
 }
 
 const script = document.createElement('script');
@@ -161,7 +168,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
 
 leaveRoomBtn.addEventListener('click', () => {
-    socket.emit('leaveRoom', roomId);
+    socket.emit('leaveRoom', roomId, localStorage.getItem('name'));
 });
 
 socket.on('leaveRoom', (name, roomId) => {
