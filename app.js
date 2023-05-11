@@ -117,8 +117,9 @@ io.on('connection', (socket) => {
     const deleteUser = async (name, roomId) => {
         try{
             await UserLobby.deleteOne({ user: name, lobby: roomId });
-            console.log(`${name} left room ${roomId}`);
             socket.leave(roomId);
+            console.log(`${name} left room ${roomId}`);
+            return
         } catch (error) {
             console.log(error);
         }
