@@ -93,7 +93,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         player.togglePlay();
         player.getCurrentState().then(async state => {
             console.log(state);
-            // currentSong = state.track_window.current_track.uri;
+            currentSong = state.track_window.current_track.uri;
             console.log(currentSong);
             await fetch(`/currentsong/${currentSong}/${roomId}` , {
                 method: 'PUT',
