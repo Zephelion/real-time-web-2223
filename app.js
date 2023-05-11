@@ -62,7 +62,7 @@ io.on('connection', (socket) => {
     socket.on('joinRoom', async (roomId) => {
 
         const data = await spotifyApi.getMe();
-        // console.log(data.body);
+        console.log(data.body);
         const name = data.body.display_name;
 
 
