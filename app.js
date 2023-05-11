@@ -70,7 +70,7 @@ io.on('connection', (socket) => {
         const lobby = await Lobby.findById(roomId).lean()
         const currentSong = lobby.currentsong;
 
-        socket.broadcast.to(roomId).emit('message', name, roomId, currentSong);
+        io.in(roomId).emit('message', name, roomId, currentSong);
 
         UserLobby.findOne({ user: name, lobby: roomId}).then((user) => {
             if(!user){
