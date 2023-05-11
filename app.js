@@ -96,7 +96,8 @@ io.on('connection', (socket) => {
         const data = await spotifyApi.getMe();
         const name = data.body.display_name;
 
-        deleteUser(name, roomId);
+        await deleteUser(name, roomId);
+        socket.emit('leaveRoom', name, roomId);
     });
 
     socket.on('disconnect', async () => {
@@ -118,7 +119,6 @@ io.on('connection', (socket) => {
             await UserLobby.deleteOne({ user: name, lobby: roomId });
             console.log(`${name} left room ${roomId}`);
             socket.leave(roomId);
-            socket.emit('leaveRoom', name, roomId);
         } catch (error) {
             console.log(error);
         }
