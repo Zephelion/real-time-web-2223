@@ -117,6 +117,13 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     
             });
         });
+
+        socket.on('next', (roomId, name) => {
+            console.log(`${name} skipped to the next song`);
+            player.nextTrack().then((state) => {
+                console.log(state);
+            });
+        });
     
         socket.on('message', (name, roomId, currentSong) => {
             console.log('Song currently playing: ', currentSong);
@@ -141,22 +148,23 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         });
     
         nextBtn.addEventListener('click', (e) => {
-            player.nextTrack().then(() => {
-                player.getCurrentState().then(async state => {
-                    console.log(currentSong);
-                    currentSong = state.track_window.current_track.uri;
-                    await fetch(`/currentsong/${currentSong}/${roomId}` , {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
-                        },
-                        body: JSON.stringify({
-                            currentSong,
-                        }),
-                    })
-                });
-            });
+            socket.emit('next', roomId, localStorage.getItem('name'));
+            // player.nextTrack().then(() => {
+            //     player.getCurrentState().then(async state => {
+            //         console.log(currentSong);
+            //         currentSong = state.track_window.current_track.uri;
+            //         await fetch(`/currentsong/${currentSong}/${roomId}` , {
+            //             method: 'PUT',
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //                 Authorization: `Bearer ${token}`,
+            //             },
+            //             body: JSON.stringify({
+            //                 currentSong,
+            //             }),
+            //         })
+            //     });
+            // });
         });
     
         previousBtn.addEventListener('click', (e) => {

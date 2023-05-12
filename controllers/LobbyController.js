@@ -56,8 +56,6 @@ const throttle = (func, limit) => {
 export const insertCurrentSong = async (req, res) => {
     const currentSong = req.params.currentSong;
     const roomId = req.params.roomId;
-
-    console.log(currentSong);
     
     Lobby.findById(roomId).then(lobby => {
         lobby.currentsong = currentSong;

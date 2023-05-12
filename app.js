@@ -110,9 +110,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('play', (roomId, uri) => {
-        // console.log(roomId, uri);
         io.to(roomId).emit('play', roomId, uri);
 
+    });
+
+    socket.on('next', (roomId, name) => {
+        io.to(roomId).emit('next', roomId, name);
     });
 
     const deleteUser = async (name, roomId) => {
