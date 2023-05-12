@@ -2,6 +2,51 @@
 ## Description
 During this course you will learn how to build a real-time application. You will learn techniques to setup an open connection between the client and the server. This will enable you to send data in real-time both ways, at the same time.
 
+## Installation
+
+## Link
+In order to use this application you must have **Spotify Premium**
+
+Click the link below in order to use the application. In order to use some of the functionality you need to contact me (Russell Numo). Because I need to add you to the dashboard or if you dont have spotify premium you may also use my account :).
+[SyncMusic](https://real-time-web-2223-production-0bfa.up.railway.app/)
+
+### locally
+
+Clone the repository with the command below
+```
+git clone https://github.com/Zephelion/real-time-web-2223.git
+```
+
+Set your environment variables
+```
+PORT="3000"
+CLIENT_ID=""
+CLIENT_SECRET=""
+SESSION_SECRET=""
+CONNECTION_STRING=""
+```
+
+In order to get the CLIENT_ID and CLIENT_SECRET you must register your application at the spotify developer dashboard.
+To get a CONNECTION_STRING you need to make a database in mongodb.
+
+In order for other users to acces the app you must added them in the developer dashboard.
+
+
+| Add user |
+|:---:|
+|![AddUser](/public/images/developer.png)|
+
+This allows them to use the player. Dont forget to put your redirectURI
+| Add user |
+|:---:|
+|![AddUser](/public/images/redirecturi.png)|
+
+Lastly run `npm install` in order to get all the needed dependencies.
+
+Voila I guess. If it doesn't work put it in rice.
+
+
+
 ## Goals
 After finishing this program you can:
 - _deal with real-time complexity;_
