@@ -8,7 +8,6 @@ import { engine } from 'express-handlebars';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import router from './routes/index.js';
-import { spotifyApi } from './controllers/UserController.js';
 import { UserLobby } from './models/UserLobby.js';
 import { Lobby } from './models/Lobby.js';
 

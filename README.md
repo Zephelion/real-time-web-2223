@@ -43,6 +43,8 @@ This allows them to use the player. Dont forget to put your redirectURI
 
 Lastly run `npm install` in order to get all the needed dependencies.
 
+and then run `npm run dev`.
+
 Voila I guess. If it doesn't work put it in rice.
 
 
