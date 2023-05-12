@@ -37,7 +37,7 @@ In order for other users to acces the app you must added them in the developer d
 |![AddUser](/public/images/developer.png)|
 
 This allows them to use the player. Dont forget to put your redirectURI
-| Add user |
+| Add redirectURIS |
 |:---:|
 |![AddUser](/public/images/redirecturi.png)|
 
