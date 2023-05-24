@@ -15,6 +15,7 @@ export const createLobby = async (req, res) => {
         name,
         description,
         user: data.body.display_name,
+        currentsong: 'spotify:track:58yWJFglBzvZ7Zao70lGtJ'
     });
     try {
         await lobby.save();
