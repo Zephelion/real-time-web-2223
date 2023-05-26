@@ -137,7 +137,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             if(!state) {
                 return;
             }
-            // const { uri } = state.track_window.current_track;
+            const { uri } = state.track_window.current_track;
+            console.log(uri);
             // socket.emit('play', roomId, uri);
         })
     
