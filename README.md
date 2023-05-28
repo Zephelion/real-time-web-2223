@@ -839,6 +839,11 @@ await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, 
 
 And thats how the play functionality works.
 
+## Diagram(scribbled)
+|Diagram|
+|:----:|
+|![Diagram](/public/images/sockets.jpeg)|
+
 
 ### Missed out oppurtunities
 This application was quite difficult to make but do-able. Because I was playing alot with the spotify api in order to get things working I didn't had much time to make it more whole.
